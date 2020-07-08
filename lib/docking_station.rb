@@ -3,7 +3,7 @@ require './lib/bike.rb'
 class DockingStation
   attr_reader :bikes
 
-  def initialize(number_of_bikes =0)
+  def initialize(number_of_bikes = 0)
     @bikes = number_of_bikes
   end
 
@@ -17,7 +17,11 @@ class DockingStation
   end
 
   def dock_bike
-    @bikes += 1
+    if @bikes == 1
+      fail
+    else
+      @bikes += 1
+    end
   end
 
 end

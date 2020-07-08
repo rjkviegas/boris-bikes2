@@ -18,4 +18,8 @@ describe DockingStation do
   it "throws an error when bike_release method called but no bikes available" do
     expect { DockingStation.new.release_bike }.to raise_error(RuntimeError)
   end
+
+  it "throws an error when dock_bike method called on a DockingStation with 1 bike" do
+    expect { DockingStation.new(1).dock_bike }.to raise_error(RuntimeError)
+  end
 end
