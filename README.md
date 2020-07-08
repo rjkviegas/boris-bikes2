@@ -3,4 +3,4 @@
 
 
 
-By SimplePrompt, Harry, Mark and Dillon.
+By --simple-prompt, Harry, Mark and Dillon.
