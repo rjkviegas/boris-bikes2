@@ -2,38 +2,34 @@ require './docking_station.rb'
 
 describe DockingStation do
 
-  describe '#release_bike' do
-  it "(a) Test gets a bike, (b) expects bike to be working." do
-  
-   # expect{subject.dock_bike(Bike.new).release_bike.is_a?(Bike)}.to eq 10
-    expect{subject.release_bike.working?}.to eq true
-  end
-end
+  describe '#release_bike' do    
+    
+    it 'releases a bike' do      
+      bike = Bike.new      
+      subject.dock_bike(bike)         
+      expect(subject.release_bike).to eq bike 
+    end
 
-  it "docking a bike at a docking station" do
-    expect(DockingStation.new.respond_to?:dock_bike).to eq true
-  end
-
-  it "uses attribute reader to see the number of bikes" do
-    expect(DockingStation.new.bikes.is_a?(Integer)).to eq true
-  end
-
-  it "throws an error when bike_release method called but no bikes available" do
-    expect { DockingStation.new.release_bike }.to raise_error(RuntimeError)
+    it 'bike released is working' do
+      bike = Bike.new
+      subject.dock_bike(bike)
+      expect(subject.release_bike.working?).to eq true
+    end
   end
 
-  it "throws an error when dock_bike method called on a DockingStation with 1 bike" do
-    expect { DockingStation.new(20).dock_bike }.to raise_error(RuntimeError)
-  end
+  describe '#dock_bike' do
+    
+    it "throws an error when bike_release method called but no bikes available" do
+      expect { subject.release_bike }.to raise_error 'No bikes available'
+    end
 
-  it "20 iterations of dock_bike method on DockingStation instance is ok" do
-    dock1 = DockingStation.new
-    20.times { dock1.dock_bike }
-    expect(dock1.bikes).to eq 20
-  end
+    it "20 iterations of dock_bike method on DockingStation instance is ok" do
+      20.times { subject.dock_bike(Bike.new) }
+      expect(subject.bikes.count).to eq 20
+    end
 
-  it "21 iterations of dock_bike method on DockingStation instance throws an error" do
-    dock1 = DockingStation.new
-    expect { 21.times { dock1.dock_bike } }.to raise_error(RuntimeError)
+    it "21 iterations of dock_bike method on DockingStation instance throws an error" do
+      expect { 21.times { subject.dock_bike(Bike.new) } }.to raise_error 'Docking station full'
+    end
   end
 end

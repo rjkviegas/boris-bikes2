@@ -2,24 +2,23 @@ require './lib/bike.rb'
 
 class DockingStation
   attr_reader :bikes
-
   def initialize
     @bikes = []
   end
 
   def release_bike
     if @bikes.count == 0
-      fail
+      raise 'No bikes available'
     else
       @bikes.pop 
     end
   end
 
   def dock_bike(bike)
-    if @bikes >= 20
-      fail
+    if @bikes.count >= 20
+      raise 'Docking station full'
     else
-      @bikes += 1
+      @bikes << bike
     end
   end
 
